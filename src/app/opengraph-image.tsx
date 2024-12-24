@@ -12,7 +12,7 @@ export const contentType = "image/png";
 
 export default async function Image() {
   const interSemiBold = await fetch(
-    new URL("./Inter-SemiBold.ttf", import.meta.url)
+    new URL("./Inter_18pt-SemiBold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(
