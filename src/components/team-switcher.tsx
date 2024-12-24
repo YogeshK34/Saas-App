@@ -1,24 +1,11 @@
 "use client";
 
 import * as React from "react";
-import {
-  CaretSortIcon,
-  CheckIcon,
-  PlusCircledIcon,
-} from "@radix-ui/react-icons";
+import { Check, ChevronsUpDown, PlusCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
 import {
   Dialog,
   DialogContent,
@@ -26,7 +13,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -70,14 +56,7 @@ const groups = [
 
 type Team = (typeof groups)[number]["teams"][number];
 
-type PopoverTriggerProps = React.ComponentPropsWithoutRef<
-  typeof PopoverTrigger
->;
-
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface TeamSwitcherProps extends PopoverTriggerProps {}
-
-export default function TeamSwitcher({ className }: TeamSwitcherProps) {
+export default function TeamSwitcher() {
   const [open, setOpen] = React.useState(false);
   const [showNewTeamDialog, setShowNewTeamDialog] = React.useState(false);
   const [selectedTeam, setSelectedTeam] = React.useState<Team>(
@@ -93,7 +72,7 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
             role="combobox"
             aria-expanded={open}
             aria-label="Select a team"
-            className={cn("w-[200px] justify-between", className)}
+            className="w-[200px] justify-between"
           >
             <Avatar className="mr-2 h-5 w-5">
               <AvatarImage
@@ -103,64 +82,58 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
               <AvatarFallback>SC</AvatarFallback>
             </Avatar>
             {selectedTeam.label}
-            <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
-          <Command>
-            <CommandList>
-              <CommandInput placeholder="Search team..." />
-              <CommandEmpty>No team found.</CommandEmpty>
-              {groups.map((group) => (
-                <CommandGroup key={group.label} heading={group.label}>
-                  {group.teams.map((team) => (
-                    <CommandItem
-                      key={team.value}
-                      onSelect={() => {
-                        setSelectedTeam(team);
-                        setOpen(false);
-                      }}
-                      className="text-sm"
-                    >
-                      <Avatar className="mr-2 h-5 w-5">
-                        <AvatarImage
-                          src={`https://avatar.vercel.sh/${team.value}.png`}
-                          alt={team.label}
-                          className="grayscale"
-                        />
-                        <AvatarFallback>SC</AvatarFallback>
-                      </Avatar>
-                      {team.label}
-                      <CheckIcon
-                        className={cn(
-                          "ml-auto h-4 w-4",
-                          selectedTeam.value === team.value
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              ))}
-            </CommandList>
-            <CommandSeparator />
-            <CommandList>
-              <CommandGroup>
-                <DialogTrigger asChild>
-                  <CommandItem
-                    onSelect={() => {
+          <div className="max-h-[300px] overflow-y-auto">
+            {groups.map((group) => (
+              <div key={group.label}>
+                <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                  {group.label}
+                </div>
+                {group.teams.map((team) => (
+                  <div
+                    key={team.value}
+                    className={cn(
+                      "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
+                      selectedTeam.value === team.value &&
+                        "bg-accent text-accent-foreground"
+                    )}
+                    onClick={() => {
+                      setSelectedTeam(team);
                       setOpen(false);
-                      setShowNewTeamDialog(true);
                     }}
                   >
-                    <PlusCircledIcon className="mr-2 h-5 w-5" />
-                    Create Team
-                  </CommandItem>
-                </DialogTrigger>
-              </CommandGroup>
-            </CommandList>
-          </Command>
+                    <Avatar className="mr-2 h-5 w-5">
+                      <AvatarImage
+                        src={`https://avatar.vercel.sh/${team.value}.png`}
+                        alt={team.label}
+                      />
+                      <AvatarFallback>SC</AvatarFallback>
+                    </Avatar>
+                    {team.label}
+                    {selectedTeam.value === team.value && (
+                      <Check className="ml-auto h-4 w-4" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="p-2">
+            <Button
+              variant="outline"
+              className="w-full justify-start"
+              onClick={() => {
+                setOpen(false);
+                setShowNewTeamDialog(true);
+              }}
+            >
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Create Team
+            </Button>
+          </div>
         </PopoverContent>
       </Popover>
       <DialogContent>

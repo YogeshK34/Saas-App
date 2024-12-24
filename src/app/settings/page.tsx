@@ -30,11 +30,7 @@ const sidebarNavItems = [
   },
 ];
 
-interface SettingsLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function SettingsLayout({ children }: SettingsLayoutProps) {
+export default function SettingsPage() {
   return (
     <div className="space-y-6 p-10 pb-16">
       <div className="space-y-0.5">
@@ -48,7 +44,9 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
         <aside className="-mx-4 lg:w-1/5">
           <SidebarNav items={sidebarNavItems} />
         </aside>
-        <div className="flex-1 lg:max-w-2xl">{children}</div>
+        <div className="flex-1 lg:max-w-2xl">
+          {/* Content will be rendered here by nested routes */}
+        </div>
       </div>
     </div>
   );

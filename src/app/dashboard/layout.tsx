@@ -1,8 +1,8 @@
 import { MainNav } from "@/components/main-nav";
 import { Search } from "@/components/search";
-import TeamSwitcher from "@/components/team-switcher";
 import { UserNav } from "@/components/user-nav";
 import { Toaster } from "@/components/ui/toaster";
+import TeamSwitcher from "@/components/team-switcher";
 
 export default function DashboardLayout({
   children,
