@@ -3,7 +3,7 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: ['your-saas-management-app.vercel.app'],
+        domains: ['fonts.gstatic.com'],
     },
 }
 

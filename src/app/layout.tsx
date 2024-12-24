@@ -10,33 +10,31 @@ import { Footer } from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SaaS Management App",
+  title: "SaaSphere",
   description:
-    "Efficiently manage and optimize your SaaS subscriptions and usage.",
+    "Streamline your SaaS ecosystem with our comprehensive management platform",
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://your-saas-management-app.vercel.app",
-    siteName: "SaaS Management App",
-    title: "SaaS Management App",
+    title: "SaaSphere",
     description:
-      "Efficiently manage and optimize your SaaS subscriptions and usage.",
+      "Streamline your SaaS ecosystem with our comprehensive management platform",
+    url: "https://saas-sphere.vercel.app/",
+    siteName: "SaaSphere",
     images: [
       {
-        url: "https://your-saas-management-app.vercel.app/og-image.png",
+        url: "/social.png",
         width: 1200,
         height: 630,
-        alt: "SaaS Management App",
       },
     ],
+    locale: "en-US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SaaS Management App",
+    title: "SaaSphere",
     description:
-      "Efficiently manage and optimize your SaaS subscriptions and usage.",
-    images: ["https://your-saas-management-app.vercel.app/og-image.png"],
-    creator: "@YogeshK34",
+      "Streamline your SaaS ecosystem with our comprehensive management platform",
+    images: ["/social.png"],
   },
 };
 
